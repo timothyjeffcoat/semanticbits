@@ -1,0 +1,20 @@
+{
+  "name": "angular-seed-api",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A starter project for AngularJS",
+  "repository": "https://github.com/rg1220/angular-seed-api",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
