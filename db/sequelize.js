@@ -19,7 +19,7 @@ const init = async (force) => {
     await sequelize.sync({ force: force || false })
     return 'Connection has been established successfully.';
   } catch (error) {
-    throw new Error('DB Connection failed!', error);
+    throw new Error('DB Connection failed!');
   }
 }
 

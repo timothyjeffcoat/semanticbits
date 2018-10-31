@@ -1,13 +1,14 @@
 {
-  "name": "angular-seed-api",
+  "name": "semanticbits-interview-api",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/rg1220/angular-seed-api",
+  "description": "A starter API project",
+  "repository": "https://github.com/semanticbits/interview-api",
   "license": "MIT",
   "scripts": {
     "prestart": "npm install",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "seed": "node ./db/seed.js"
   },
   "dependencies": {
     "body-parser": "^1.17.1",

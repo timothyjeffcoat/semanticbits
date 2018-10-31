@@ -1,15 +1,13 @@
 const faker = require('faker');
 
 const db = require('./sequelize');
-const Patient = require('./models/Patient');
-const Drug = require('./models/Drug');
-const PatientDrug = require('./models/PatientDrug');
+const { Patient, Drug, PatientDrug } = require('./models');
 
 async function seedDb() {
   await db.init(true);
 
-  // force: true will drop the table if it already exists
-
+  // force: true will drop the tables if they already exists
+  
   // create patients
   await Patient.sync({force: true});
   const patients = [];

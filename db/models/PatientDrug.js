@@ -7,6 +7,6 @@ const PatientDrug = db.sequelize.define('patient_drug', {
   drugId: {
     type: db.Sequelize.INTEGER
   }
-});
+}, { timestamps: false });
 
 module.exports = PatientDrug;

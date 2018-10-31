@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const Patient = require('../../db/models/Patient');
-const Drug = require('../../db/models/Drug');
+const { Patient, Drug, PatientDrug } = require('../../db/models');
 
 let patients = [
   {
@@ -15,13 +14,15 @@ let patients = [
   }
 ];
 
-
-// todo: add pagination
 router.get('/', async (req, res) => {
   const data = await Patient.findAll({
     include: [{
       model: Drug,
-      as: 'drugs'
+      as: 'drugs',
+      through: {
+        model: PatientDrug,
+        attributes: [],
+      }
     }]
   });
 

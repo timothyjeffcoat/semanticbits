@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const db = require('./db/sequelize');
 
 const app = express();
-app.set('port', 9001);
+app.set('port', 9000);
 app.set('json spaces', 4);
 
 const routes = require('./routes');
@@ -45,9 +45,10 @@ server.listen(app.get('port'), async () => {
 
   // initialize the sqlite db
   try {
-    db.init();
+    await db.init();
     app.set('db', db); 
   } catch (error) {
     console.log(error.message, error);
+    process.exit(1);
   }
 });
