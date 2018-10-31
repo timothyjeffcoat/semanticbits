@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Patient, Drug, PatientDrug } = require('../../db/models');
+const { Patient, Drug, PatientDrug, sequelize } = require('../../db');
 
 let patients = [
   {
@@ -25,6 +25,8 @@ router.get('/', async (req, res) => {
       }
     }]
   });
+
+  // const data = await sequelize.query('select * from patients');
 
   res.json({
     patients: data
