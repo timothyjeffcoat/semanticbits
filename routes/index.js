@@ -1,5 +1,5 @@
-var router = require('express').Router();
-var people = require('./people');
+const router = require('express').Router();
+const patients = require('./patients');
 
 router.get('/', function(req, res) {
   res.json({
@@ -7,6 +7,6 @@ router.get('/', function(req, res) {
   });
 });
 
-router.use('/people', people);
+router.use('/patients', patients);
 
 module.exports = router;

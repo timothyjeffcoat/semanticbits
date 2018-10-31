@@ -1,19 +1,16 @@
-var path = require('path');
-var http = require('http');
+const path = require('path');
+const http = require('http');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const db = require('./db/sequelize');
 
-var routes = require('./routes');
-
-var app = express();
-app.set('port', 9000);
+const app = express();
+app.set('port', 9001);
 app.set('json spaces', 4);
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+const routes = require('./routes');
 
 if (process.env.NODE_ENV === 'dev') {
   app.use(function (req, res, next) {
@@ -27,7 +24,7 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization,X-Requested-With');
 
-// intercept OPTIONS method
+  // intercept OPTIONS method
   if ('OPTIONS' == req.method) {
     res.sendStatus(200);
   }
@@ -42,7 +39,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './public')));
 app.use(routes);
 
-var server = http.createServer(app);
-server.listen(app.get('port'), function() {
+const server = http.createServer(app);
+server.listen(app.get('port'), async () => {
   console.log('Express server listening on port ' + server.address().port);
+
+  // initialize the sqlite db
+  try {
+    await db.init();
+  } catch (error) {
+    console.log(error.message, error);
+    process.exit(1);
+  }
 });
