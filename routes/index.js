@@ -1,5 +1,5 @@
-var router = require('express').Router();
-var people = require('./people');
+const router = require('express').Router();
+const people = require('./people');
 
 router.get('/', function(req, res) {
   res.json({

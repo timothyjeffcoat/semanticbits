@@ -1,7 +1,8 @@
-var router = require('express').Router();
+const router = require('express').Router();
+const Patient = require('../../db/models/Patient');
+const Drug = require('../../db/models/Drug');
 
-//TODO: Move this into a database
-var people = [
+let patients = [
   {
     id: 1,
     first_name: 'John',
@@ -14,50 +15,60 @@ var people = [
   }
 ];
 
-router.get('/', function(req, res) {
+
+// todo: add pagination
+router.get('/', async (req, res) => {
+  const data = await Patient.findAll({
+    include: [{
+      model: Drug,
+      as: 'drugs'
+    }]
+  });
+
   res.json({
-    people: people
+    patients: data
   });
 });
 
 router.post('/', function(req, res) {
-  var id = Math.random() * 100000;
-  var data = Object.assign({}, req.body, {id: id});
-  people.push(data);
+  const id = Math.random() * 100000;
+  const data = Object.assign({}, req.body, {id: id});
+  patients.push(data);
 
   res.json({
-    person: data
+    patient: data
   });
 });
 
 router.get('/:id', function(req, res) {
   res.json({
-    person: people.find(function(person) {
-      return (person.id === req.params.id);
+    person: patients.find(function(patient) {
+      return (patient.id === req.params.id);
     })
   });
 });
 
 router.put('/:id', function(req, res) {
-  var data = Object.assign({}, req.body);
-  var index = people.findIndex(function(person) {
-    return (person.id === req.params.id);
+  const data = Object.assign({}, req.body);
+  const index = patients.findIndex(function(patient) {
+    return (patient.id === req.params.id);
   });
+
   if (index === -1) {
     res.json({});
   } else {
-    people.splice(index, 1, data);
+    patients.splice(index, 1, data);
 
     res.json({
-      person: data
+      patient: data
     });
   }
 });
 
 router.delete('/:id', function(req, res) {
   res.json({
-    person: people.filter(function(person) {
-      return (person.id !== req.params.id);
+    patient: patients.filter(function(patient) {
+      return (patient.id !== req.params.id);
     })
   });
 });
