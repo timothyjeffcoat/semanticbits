@@ -23,7 +23,8 @@ router.get('/', async (req, res) => {
         model: PatientDrug,
         attributes: [],
       }
-    }]
+    }],
+    limit: 25
   });
 
   // const data = await sequelize.query('select * from patients');
