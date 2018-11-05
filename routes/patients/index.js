@@ -15,22 +15,22 @@ let patients = [
 ];
 
 router.get('/', async (req, res) => {
-  const data = await Patient.findAll({
-    include: [{
-      model: Drug,
-      as: 'drugs',
-      through: {
-        model: PatientDrug,
-        attributes: [],
-      }
-    }],
-    limit: 25
-  });
+  // const data = await Patient.findAll({
+  //   include: [{
+  //     model: Drug,
+  //     as: 'drugs',
+  //     through: {
+  //       model: PatientDrug,
+  //       attributes: [],
+  //     }
+  //   }],
+  //   limit: 25
+  // });
 
   // const data = await sequelize.query('select * from patients');
 
   res.json({
-    patients: data
+    patients
   });
 });
 
