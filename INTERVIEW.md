@@ -1,4 +1,4 @@
-####The first test is to 
+#### The first test is to 
 
 Get an array of all people in the Marvel organization, with no duplicate last names,
 sorted by id, and add a name field that is a combination of firstName + lastName
@@ -37,7 +37,7 @@ const data = [{
 
 ```
 
-####The second test 
+#### The second test 
 
 Is to determine the values of the variables i and name.
 Put a comment with the value next to each line that has a console.log
